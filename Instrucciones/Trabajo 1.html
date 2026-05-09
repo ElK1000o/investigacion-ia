@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Proyecto de Investigación IA 2026 - U. Mayor</title>
+    <style>
+        :root {
+            --corporate-blue: #0033A0;
+            --corporate-yellow: #fbcb05;
+            --light-bg: #f4f6f8;        
+            --card-bg: #ffffff;         
+            --text-dark: #1a1a1a;       
+            --border-color: rgba(0, 51, 160, 0.15);
+            --danger-red: #c0392b;
+            --success-green: #27ae60;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--light-bg); color: var(--text-dark); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        
+        /* HEADER */
+        header { background-color: var(--corporate-yellow); padding: 15px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; height: 80px; display: flex; align-items: center; flex-shrink: 0; }
+        .header-text { text-align: left; flex-grow: 1; }
+        .header-title { font-size: 1.5em; font-weight: 800; margin: 0; color: var(--corporate-blue); text-transform: uppercase; }
+        .header-subtitle { font-size: 0.9em; font-weight: 600; color: #333; }
+
+        /* SLIDER */
+        .slider-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; min-height: 0; }
+        .slider { position: relative; width: 100%; max-width: 1300px; height: 100%; background: var(--card-bg); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); overflow: hidden; display: flex; border: 1px solid var(--border-color); }
+        
+        .slide { min-width: 100%; height: 100%; display: flex; flex-direction: column; padding: 40px 60px; position: absolute; opacity: 0; transition: opacity 0.4s ease; overflow-y: auto; pointer-events: none; }
+        .slide.active { opacity: 1; z-index: 1; pointer-events: auto; }
+
+        h1 { color: var(--corporate-blue); font-size: 2em; margin-bottom: 20px; border-bottom: 3px solid var(--corporate-yellow); padding-bottom: 5px; }
+        h2 { color: var(--corporate-blue); font-size: 1.4em; margin-bottom: 15px; margin-top: 15px; }
+        p, li { font-size: 1.05em; line-height: 1.6; margin-bottom: 10px; }
+        ul, ol { margin-left: 30px; margin-bottom: 20px; }
+
+        .info-box { background: #fffbea; border-left: 6px solid var(--corporate-yellow); padding: 15px; border-radius: 4px; margin: 20px 0; }
+        .danger-box { background: #fdf2f2; border-left: 6px solid var(--danger-red); padding: 15px; border-radius: 4px; margin: 20px 0; }
+
+        /* TABLE */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95em; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: var(--corporate-blue); color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        /* NAV */
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: white; border: 2px solid var(--corporate-blue); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 100; font-size: 1.5em; color: var(--corporate-blue); display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .nav-btn:hover { background: var(--corporate-blue); color: white; }
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
+        /* SIMULATOR */
+        .simulator { background: #f4f6f8; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .sim-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; background: white; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        select { padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 1em; width: 250px; }
+        .score-display { text-align: center; margin-top: 20px; font-size: 2.2em; font-weight: 800; color: var(--corporate-blue); }
+
+        footer { background: var(--corporate-yellow); padding: 10px; text-align: center; font-weight: 700; font-size: 0.8em; text-transform: uppercase; }
+        
+        /* TWO COLUMNS FOR LONG LISTS */
+        .two-columns { column-count: 2; column-gap: 40px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-text">
+            <h1 class="header-title">Proyecto Final IA: Ciencia de Datos en Chile</h1>
+            <p class="header-subtitle">ICCD1021 | Facultad de Ingeniería | Universidad Mayor</p>
+        </div>
+    </header>
+
+    <main class="slider-container">
+        <button class="nav-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+
+        <div class="slider">
+            <div class="slide active">
+                <h1>1. El Desafío Científico</h1>
+                <p>Este trabajo consiste en un ejercicio de <strong>Investigación Científica</strong>. El conocimiento a producir debe caracterizarse por ser:</p>
+                <ul>
+                    <li><strong>Sistemático:</strong> No pueden eliminar pasos arbitrariamente, deben seguir rigurosamente el proceso.</li>
+                    <li><strong>Metódico:</strong> Implica elegir un camino ordenado (en este caso, el pipeline de IA).</li>
+                    <li><strong>Racional y Reflexivo:</strong> Deben romper con el sentido común y el saber inmediato para alcanzar la objetividad en los datos chilenos.</li>
+                </ul>
+                <div class="info-box">
+                    <strong>Objetivo Principal:</strong> Identificar y resolver un problema de la sociedad chilena mediante algoritmos de Inteligencia Artificial. Todo problema de investigación yace en la <strong>discrepancia entre un modelo ideal (lo que debería ser) y un modelo real (lo que indican los datos empíricos)</strong>. Si no hay discrepancia, no hay investigación.
+                </div>
+                <ul>
+                    <li><strong>Grupos:</strong> Máximo 3 alumnos.</li>
+                    <li><strong>Fecha Máxima de Entrega:</strong> Martes 12 de Mayo de 2026 | 23:59 hrs.</li>
+                    <li><strong>Formato:</strong> Archivo ZIP ("Investigacion IA - Apellido1_Apellido2.zip") vía Blackboard, conteniendo Informe PDF y Código (Python/Jupyter).</li>
+                </ul>
+            </div>
+
+            <div class="slide">
+                <h1>2. Temas de Investigación (Realidad Chile 2026)</h1>
+                <p>Deben seleccionar uno de los siguientes contextos para desarrollar su investigación empírica cruzando datos:</p>
+                <div class="two-columns">
+                    <ol style="font-size: 0.9em;">
+                        <li>Rechazo de Licencias Médicas (SUSESO).</li>
+                        <li>Riesgo de Deserción Escolar (MINEDUC).</li>
+                        <li>Supervivencia de PYMES regionales (SII).</li>
+                        <li>Anomalías en Mercado Público (DBSCAN).</li>
+                        <li>Segmentación de Comunas (K-Means).</li>
+                        <li>Ciberdelincuencia y Conectividad (CSIRT).</li>
+                        <li>Impacto de Telemedicina en Listas de Espera.</li>
+                        <li>Peaks de Contaminación y Urgencias (MMA).</li>
+                        <li>Vulnerabilidad Social y Multidimensional.</li>
+                        <li>Evasión y Frecuencia de Buses (MTT).</li>
+                        <li>Déficit y Subsidios Habitacionales (MINVU).</li>
+                        <li>Predicción de Incendios Forestales (CONAF).</li>
+                        <li>Brecha Salarial de Género en Cargos STEM.</li>
+                        <li>Inserción Laboral de Migrantes (INE).</li>
+                        <li>Consumo Eléctrico y Anomalías (CNE).</li>
+                        <li>Estrés Hídrico y Rendimiento Agrícola.</li>
+                        <li>Reactivación del Turismo Regional Post-Crisis.</li>
+                        <li>Densidad Poblacional y Crimen Urbano (CEAD).</li>
+                        <li>Gravedad de Accidentes de Tránsito (CONASET).</li>
+                        <li>Análisis de Discursos Gubernamentales (NLP).</li>
+                    </ol>
+                </div>
+                <div class="info-box">
+                    <strong>Fuentes Oficiales Sugeridas (Bases CSV):</strong> <br>
+                    <a href="https://datos.gob.cl/" target="_blank">Datos Abiertos del Gobierno (datos.gob.cl)</a> | 
+                    <a href="https://www.ine.gob.cl/" target="_blank">Instituto Nacional de Estadísticas (INE)</a> | 
+                    <a href="https://observatorio.ministeriodesarrollosocial.gob.cl/" target="_blank">Observatorio Social (MDS)</a> |
+                    <a href="https://cead.spd.gov.cl/" target="_blank">Centro Análisis del Delito (CEAD)</a>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h1>3. Rigor Metodológico y Formulación</h1>
+                <p>Su informe debe reflejar la aplicación estructurada del método científico en el siguiente orden:</p>
+                <ul>
+                    <li><strong>Delimitación del Tema:</strong> Consiste en acotar (hacer un "encuadre"). Deben delimitar desde lo espacial (ej. sólo RM o Biobío), temporal (ej. 2024-2026), sociodemográfico (variables duras de las personas) y sociocultural.</li>
+                    <li><strong>Formulación de Objetivos:</strong> Los objetivos generales y particulares deben expresarse siempre en <strong>infinitivo</strong>.</li>
+                    <li><strong>Marco Teórico e Hipótesis:</strong> La hipótesis (suposición) surge del marco teórico. Las hipótesis explicativas pueden ser Causales (causa-efecto directa, raras en ciencias sociales) o Estocásticas/Probabilísticas ("Si X, entonces probablemente Y").</li>
+                    <li><strong>Definición de Variables:</strong> Las variables asumen distintos valores (no son constantes). 
+                        <br>- <strong>Independiente (X):</strong> Actúa como causa o supuesta causa.
+                        <br>- <strong>Dependiente (Y):</strong> Actúa como efecto o supuesto efecto.
+                        <br>Debe existir una <em>Definición Conceptual</em> (qué significa según la teoría) y una <em>Definición Operacional</em> (cómo se va a medir numéricamente o en el dataset).</li>
+                </ul>
+            </div>
+
+            <div class="slide">
+                <h1>4. Desarrollo e Implementación IA</h1>
+                <p>El corazón técnico del proyecto. No basta con ejecutar código; deben comportarse como Científicos de Datos:</p>
+                <ul>
+                    <li><strong>Preprocesamiento:</strong> Manejo de valores nulos, categorización, y escalamiento estricto de los datos. En algoritmos basados en distancias (ej. K-Means, DBSCAN) es mandatorio normalizar.</li>
+                    <li><strong>Deducción del Modelo:</strong> <em>Este punto es crítico.</em> El informe debe dedicar una sección a deducir y justificar qué técnica de la Unidad 2 es la más conveniente. ¿Por qué Regresión Logística y no Árboles de Decisión? ¿Por qué DBSCAN sirvió mejor que K-Means para sus anomalías? Deben comparar al menos dos modelos distintos de la asignatura y justificar por qué se descartó el otro.</li>
+                    <li><strong>El Pipeline:</strong> Secuencia de operaciones lógicas desde la limpieza hasta la predicción/clustering.</li>
+                </ul>
+                <div class="danger-box">
+                    <strong>Evaluación de Resultados:</strong> Todo modelo debe justificarse. Deben incluir la Matriz de Confusión para clasificación, el Error (MSE) para regresión, o el Método del Codo para clustering. Analicen qué implican los Falsos Positivos y Falsos Negativos en su problema social específico.
+                </div>
+            </div>
+
+            <div class="slide">
+                <h1>5. Rúbrica de Evaluación</h1>
+                <p>Los criterios se evalúan en una escala de desempeño donde: <br><strong>0</strong> = No hizo nada | <strong>1</strong> = Hizo algo pero no funciona | <strong>2</strong> = Está casi listo | <strong>3</strong> = Funciona a la perfección o cumple con lo solicitado.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criterio</th>
+                            <th>Ponderación</th>
+                            <th>Descripción Esperada (Nivel 3)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Consistencia Metodológica</strong></td>
+                            <td>25%</td>
+                            <td>Define magistralmente la discrepancia (Ideal vs Real), delimita el contexto temporal/espacial, redacta objetivos en infinitivo y operacionaliza las variables (Independiente/Dependiente) formulando hipótesis estocásticas o causales válidas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tratamiento de Datos e IA</strong></td>
+                            <td>25%</td>
+                            <td>Aplica un Pipeline robusto, escala datos adecuadamente, compara al menos dos modelos técnicamente y justifica de forma concluyente por qué el modelo seleccionado (Supervisado o No Supervisado) es el más apto para su realidad.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Análisis de Resultados</strong></td>
+                            <td>30%</td>
+                            <td>Interpreta rigurosamente las métricas de error (Matriz de Confusión, Inercia, etc.), deduce el impacto real de los sesgos algorítmicos (Falsos Positivos/Negativos) y responde a la hipótesis original validada en evidencia.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Calidad del Informe</strong></td>
+                            <td>20%</td>
+                            <td>Documento (PDF) con excelente redacción académica, estructura formal de investigación y gráficos limpios. Anexa correctamente el código fuente ordenado.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="slide">
+                <h1>6. Simulador de Nota Oficial</h1>
+                <p>Calcula tu nota estimada (Escala 1.0 a 7.0 al 60% de exigencia) seleccionando el nivel de logro en cada criterio.</p>
+                <div class="simulator">
+                    <div class="sim-row">
+                        <span><strong>Consistencia Metodológica</strong> (25%)</span>
+                        <select class="score-input" data-weight="25">
+                            <option value="0">0 - No hizo nada</option>
+                            <option value="1">1 - Hizo algo pero no funciona / incompleto</option>
+                            <option value="2">2 - Está casi listo</option>
+                            <option value="3" selected>3 - Funciona a la perfección / Cumple lo solicitado</option>
+                        </select>
+                    </div>
+                    <div class="sim-row">
+                        <span><strong>Tratamiento de Datos e IA</strong> (25%)</span>
+                        <select class="score-input" data-weight="25">
+                            <option value="0">0 - No hizo nada</option>
+                            <option value="1">1 - Hizo algo pero no funciona / incompleto</option>
+                            <option value="2">2 - Está casi listo</option>
+                            <option value="3" selected>3 - Funciona a la perfección / Cumple lo solicitado</option>
+                        </select>
+                    </div>
+                    <div class="sim-row">
+                        <span><strong>Análisis de Resultados</strong> (30%)</span>
+                        <select class="score-input" data-weight="30">
+                            <option value="0">0 - No hizo nada</option>
+                            <option value="1">1 - Hizo algo pero no funciona / incompleto</option>
+                            <option value="2">2 - Está casi listo</option>
+                            <option value="3" selected>3 - Funciona a la perfección / Cumple lo solicitado</option>
+                        </select>
+                    </div>
+                    <div class="sim-row">
+                        <span><strong>Calidad del Informe</strong> (20%)</span>
+                        <select class="score-input" data-weight="20">
+                            <option value="0">0 - No hizo nada</option>
+                            <option value="1">1 - Hizo algo pero no funciona / incompleto</option>
+                            <option value="2">2 - Está casi listo</option>
+                            <option value="3" selected>3 - Funciona a la perfección / Cumple lo solicitado</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateGrade()" style="margin-top: 15px; width:100%; padding:15px; background:var(--corporate-blue); color:white; border:none; border-radius:4px; cursor:pointer; font-size: 1.1em; font-weight:bold; transition: 0.3s;">CALCULAR NOTA OBTENIDA</button>
+                    <div class="score-display" id="final-grade">NOTA: 7.0</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        UNIVERSIDAD MAYOR | FACULTAD DE INGENIERÍA | ICCD1021 - INTELIGENCIA ARTIFICIAL
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function calculateGrade() {
+            const inputs = document.querySelectorAll('.score-input');
+            let totalWeightedPoints = 0;
+            const maxPointsPerCriteria = 3;
+
+            inputs.forEach(input => {
+                const score = parseInt(input.value);
+                const weight = parseInt(input.getAttribute('data-weight')); 
+                totalWeightedPoints += (score / maxPointsPerCriteria) * weight;
+            });
+
+            // Chilean standard 60% requirement scale mapping (0 to 100 points)
+            let grade = 1.0;
+            
+            if (totalWeightedPoints >= 60) {
+                // From 60 to 100 points -> Grade 4.0 to 7.0
+                grade = 4.0 + ((totalWeightedPoints - 60) / 40.0) * 3.0;
+            } else {
+                // From 0 to 59 points -> Grade 1.0 to 3.9
+                grade = 1.0 + (totalWeightedPoints / 60.0) * 3.0;
+            }
+            
+            if(grade > 7.0) grade = 7.0;
+            if(grade < 1.0) grade = 1.0;
+
+            const displayEl = document.getElementById('final-grade');
+            displayEl.innerText = "NOTA: " + grade.toFixed(1);
+            displayEl.style.color = grade >= 4.0 ? 'var(--success-green)' : 'var(--danger-red)';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+# =============================================================
+# Datos de entrada — archivos originales demasiado grandes
+# y bajo restricciones de licencia del INE / MDS
+# =============================================================
+input/data/
+
+# =============================================================
+# Datos procesados — se regeneran ejecutando los notebooks
+# =============================================================
+output/data/
+
+# =============================================================
+# Figuras — se regeneran ejecutando los notebooks
+# =============================================================
+# Descomentar si no se quieren incluir en el repositorio:
+# output/fig/
+
+# =============================================================
+# Python
+# =============================================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.so
+
+# =============================================================
+# Jupyter
+# =============================================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# =============================================================
+# Entornos virtuales
+# =============================================================
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# =============================================================
+# LaTeX (auxiliares generados en compilación)
+# =============================================================
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+
+# =============================================================
+# Editores y sistema operativo
+# =============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.idea/
+.vscode/
+*.code-workspace
