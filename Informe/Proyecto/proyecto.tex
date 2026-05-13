@@ -6,64 +6,73 @@
 \chapter{Investigación IA}
 
 \section{Introducción}
-% La introducción es la presentación clara, breve y precisa del contenido general del proyecto del Electivo de Profundización I, que invita al lector a leer el documento de forma motivante, clara y precisa. Los aspectos que debe considerar son:
-%    Las motivaciones para la elección del tema.
-%    Antecedentes de la problemática o necesidad abordada con el proyecto.
-%    El objetivo del proyecto mencionado al final de la introducción.
-%    Todas las referencias necesarias para fundamentar y validar el tema expuesto.
-\subsection{Contexto del problema}
 
-% Migración en Chile
-% Mercado laboral
+La migración se ha transformado en un proceso central de transformación demográfica y laboral en Chile. Analizar la inserción migrante únicamente desde indicadores de ocupación resulta insuficiente: una mayor tasa de empleo no implica mejores condiciones, estabilidad ni protección social \citep{lamas_aicon_ambitos_2024}. Se requiere incorporar dimensiones de formalidad, ingresos, calidad del empleo y segmentación ocupacional.
 
-\subsection{Problema de investigación}
-
-% Discrepancia ideal vs real
-
-\subsection{Justificación}
-
-% Uso de ENE + CASEN
-% Relevancia social y analítica
-
-
+Los datos de \citet{ENE2024} y \citet{CASEN2024} revelan que los migrantes presentan mayor ocupación pero menores niveles de formalidad e ingresos por hora, concentrándose en sectores de menor valorización. Esta doble desventaja —mayor carga laboral y menor remuneración— persiste aun considerando que los migrantes exhiben mayor proporción en educación universitaria y de postgrado que la población nacional \citep{noauthor_mirada_nodate}. El modelo ideal corresponde a una inserción laboral donde mayor participación implique también mayor formalidad, protección social y remuneración acorde al capital humano. El modelo real evidenciado en los datos muestra lo contrario: mayor ocupación migrante coexistiendo con menores ingresos, menor formalidad y segmentación ocupacional. Esta discrepancia constituye el problema central de investigación, abordado mediante estadística multivariada, aprendizaje supervisado y clustering.
 
 % \begin{center}
 	%     \begin{minipage}{400px}
 		%         Para cita en bloque
-	%     \end{minipage}
-% \end{center}
+		%     \end{minipage}
+	% \end{center}
 
-% \citep{CASEN2022, Castro-Romero2024}. 
+% \citep{CASEN2022, Castro-Romero2024}.
 
 \section{Objetivos}
 
 % En esta parte se debe escribir el objetivo general y los objetivos específicos del tema a desarrollar.
+\textbf{Objetivo general:} Analizar la inserción laboral de la población migrante en Chile mediante datos de ENE y CASEN 2024, usando estadística multivariada, aprendizaje supervisado y clustering, para identificar patrones de segmentación y desigualdad respecto a la población nacional.
 
-\subsection{Objetivo General}
-
-% Se debe declarar el objetivo general de todo el proyecto de manera que contenga de manera global a todos los objetivos específicos.
-
-
-
-\subsection{Objetivos Específicos}
-
-% Los objetivos específicos se deben desprender lógicamente desde el objetivo general, y corresponde a tareas específicas que conllevan a resolver el objetivo del proyecto.
-
-% (Importante: que cada uno tenga vínculo directo con análisis/modelos)
+\textbf{Objetivos específicos:}
+\begin{enumerate}
+    \item Comparar tasas de ocupación, formalidad e ingresos entre población migrante y chilena.
+    \item Evaluar si la condición migratoria se asocia con brechas salariales y de formalidad al controlar por variables sociodemográficas.
+    \item Identificar perfiles diferenciados de inserción laboral mediante clustering para analizar segmentación ocupacional y posible subempleo calificado.
+\end{enumerate}
 
 \section{Hipótesis de Investigación}
 
+Como plantea \citet[p.22]{correa2025migracionchile}, ``la alta tasa de ocupación coexiste con una vulnerabilidad diferenciada por origen''. A partir de ello se formulan las siguientes hipótesis estocásticas:
+
+\textbf{H1. Ocupación:} La población migrante presenta mayores niveles de participación y ocupación laboral en comparación con la población nacional dentro del mercado laboral chileno.
+
+\textbf{H2. Brecha salarial:} La población migrante presenta menores ingresos laborales promedio y menores remuneraciones por hora en comparación con la población chilena, incluso al considerar variables como educación, edad, sexo y macrozona.
+
+\textbf{H3. Informalidad y precariedad:} Las personas migrantes presentan mayores niveles de informalidad laboral y menores niveles de acceso a mecanismos de protección social y previsional respecto de la población nacional.
+
+\textbf{H4. Segmentación ocupacional:} La población migrante se concentra en ocupaciones y sectores económicos de menor valorización, especialmente en comercio, servicios y ocupaciones elementales, con menor participación en ocupaciones profesionales y técnicas.
+
+\textbf{H5. Heterogeneidad migrante:} La inserción laboral de la población migrante no es homogénea, sino que presenta perfiles diferenciados que pueden identificarse mediante técnicas de clustering y análisis multivariado.
+
+\textbf{H6. Subempleo calificado:} Existe un desajuste entre el nivel educativo y las ocupaciones desempeñadas, mostrando situaciones de sobrecalificación y subutilización del capital humano.
 
 
-\subsection{Hipótesis principal}
 
+\section{Metodología y definición de variables}
 
+El análisis es cuantitativo y observacional, con enfoque descriptivo-explicativo; los resultados deben interpretarse como asociaciones estadísticas, no relaciones causales. Se utiliza ENE 2024 (ocupación, formalidad, grupos ocupacionales) y CASEN 2024 (ingresos, educación, condiciones socioeconómicas). El año 2024 se seleccionó porque la CASEN 2024 es la edición más reciente disponible y el análisis de ingresos requiere esa fuente; se utilizó el mismo año para la ENE para mantener concordancia temporal.
 
-\subsection{Hipótesis secundarias}
+La Tabla~\ref{tab:variables} define conceptual y operacionalmente las variables principales. Las \textbf{variables de control} incluyen sexo, edad, nivel educativo, macrozona, grupo ocupacional y sector económico.
 
-
-
-\section{Metodología} 
+\begin{table}[H]
+	\centering
+	\caption{Definición conceptual y operacional de variables principales.}
+	\label{tab:variables}
+	\begin{tabularx}{\textwidth}{l X X}
+		\toprule
+		\textbf{Variable} & \textbf{Definición conceptual} & \textbf{Definición operacional} \\
+		\midrule
+		Cond.\ migratoria (VI) & Diferencia entre población migrante y nacional & ENE: persona de nacionalidad no chilena; CASEN: persona nacida fuera de Chile \\[4pt]
+		Ingreso/hora (VD) & Retorno económico del trabajo por unidad de tiempo & \texttt{yoprcor}~/~(\texttt{o10}~$\times$~4{,}33), winsorizado p99 \\[4pt]
+		Formalidad (VD) & Inserción con protección contractual o previsional & Contrato escrito o cotización previsional \\[4pt]
+		IILM (VD) & Calidad multidimensional de la inserción laboral & Promedio de 5 dimensiones binarias; escala 0--1 \\
+		\bottomrule
+	\end{tabularx}
+	\begin{flushleft}
+		\footnotesize \textit{Nota:} VI~=~variable independiente; VD~=~variable dependiente.
+	\end{flushleft}
+\end{table}
 
 % En la parte de metodología se deben explicar las herramientas técnicas, modelos matemáticos, análisis estadísticos que se utilizarán para resolver el problema, detallando:
 
@@ -72,38 +81,7 @@
 %    Todas las referencias necesarias para fundamentar y sustentar teóricamente.
 
 
-\subsection{Diseño de investigación}
-
-% Tipo: cuantitativo, observacional, transversal
-
-\subsection{Fuentes de datos}
-
-
-
-\subsubsection{Encuesta Nacional de Empleo (ENE)}
-
-
-\subsubsection{Encuesta de Caracterización Socioeconómica Nacional(CASEN)}
-
-% Aquí justificas por qué usas ambas
-
-\subsection{Definición de variables}
-
-
-
-\subsubsection{Variable dependiente (y)}
-
-
-
-\subsubsection{Variables independientes (X)}
-
-
-
-\subsubsection{Variables de control}
-
-
-
-\subsection{Preprocesamiento de datos}
+\subsection{Preprocesamiento y construcción de variables}
 
 % Incluye:
 
@@ -112,62 +90,68 @@
 % transformación de variables
 % generación de nuevas variables (feature engineering)
 
-\subsection{Pipeline de análisis}
+En ENE se filtró la muestra a personas de 15 años y más, se corrigió el separador decimal del factor de expansión anual, y se construyeron las variables \texttt{migrante} (nacionalidad $\neq$ 152), \texttt{formal} (desde \texttt{ocup\_form}), grupo de edad, macrozona y el indicador de sobrecalificación. En CASEN, los códigos $-88$ y $-99$ se reemplazaron por \texttt{NaN}; la condición migratoria se construyó desde \texttt{lugar\_nac}; el ingreso por hora se calculó como:
 
+$$
+	\texttt{ingreso\_hora} = \frac{\texttt{yoprcor}}{\texttt{o10} \times 4{,}33}
+$$
 
+winsorizado al percentil 99. La variable educacional fue reconstruida en 7 niveles desde \texttt{e6a\_no\_asiste} y \texttt{e6c\_completo}. Se construyó el Índice de Inserción Laboral Multidimensional (IILM) como promedio de cinco dimensiones binarias, inspirado en el enfoque Alkire-Foster del Índice de Pobreza Multidimensional, adaptado para medir calidad de inserción laboral (0 = muy débil, 1 = favorable):
 
-\subsection{Estrategia analítica}
+\begin{align*}
+	\text{IILM} = \frac{1}{5}\,\big(& \texttt{dim\_empleo} + \texttt{dim\_formalidad} + \texttt{dim\_ingreso} \\
+	&+ \texttt{dim\_proteccion} + \texttt{dim\_adecuacion} \big)
+\end{align*}
 
+El análisis sigue un pipeline secuencial implementado en cinco notebooks Jupyter: datos crudos $\rightarrow$ limpieza $\rightarrow$ transformación $\rightarrow$ EDA $\rightarrow$ modelos supervisados $\rightarrow$ clustering $\rightarrow$ interpretación. El proyecto se encuentra disponible públicamente en \href{https://github.com/ElK1000o/investigacion-ia}{GitHub} para su revisión y como contribución a la distribución abierta de código en la comunidad científica.
 
-
-\subsubsection{Análisis descriptivo}
-
-
-
-\subsubsection{Modelos supervisados}
-
-
-
-\subsubsection{Modelos no supervisados}
-
-
-\section{Modelo computacional y algoritmo}
-
-\subsection{Selección de modelos}
+\subsection{Modelos empleados}
 
 % \begin{lstlisting}[style=mystyle, caption={Modelo RandomForestClassifier en CASEN 2022}, label={01py}]
-% 	# Mejor modelo encontrado para CASEN 2022 (Accuracy 0.68)
-		
-% 	rf = RandomForestClassifier(n_estimators=32, # numero de arboles
-% 								criterion="gini", # medida para evaluar
-% 								max_depth=8, # profundidad
-% 								n_jobs=-1,
-% 								verbose=1,
-% 								random_state=20230728)
-% \end{lstlisting}
+	% 	# Mejor modelo encontrado para CASEN 2022 (Accuracy 0.68)
 
-\subsubsection{Regresión lineal}
-
-
-
-\subsubsection{Regresión logística}
-
-
-
-\subsubsection{K-Means}
-
-
-\subsection{Justificación de modelos}
+	% 	rf = RandomForestClassifier(n_estimators=32, # numero de arboles
+	% 								criterion="gini", # medida para evaluar
+	% 								max_depth=8, # profundidad
+	% 								n_jobs=-1,
+	% 								verbose=1,
+	% 								random_state=20230728)
+	% \end{lstlisting}
 
 % por qué ese modelo
 % qué problema resuelve
 
-\subsection{Comparación de modelos}
+La \textbf{regresión lineal OLS} estima la brecha salarial ajustada con variable dependiente $\ln(\text{ingreso/hora})$:
+
+\begin{align*}
+	\ln(\hat{y}_i) = \,&\beta_0 + \beta_1 \cdot \texttt{migrante}_i + \beta_2 \cdot \texttt{edad}_i + \beta_3 \cdot \texttt{edad}^2_i \\
+	&+ \beta_4 \cdot \texttt{sexo}_i + \boldsymbol{\beta}_5 \cdot \texttt{edu\_grupo}_i + \boldsymbol{\beta}_6 \cdot \texttt{macrozona}_i + \varepsilon_i
+\end{align*}
+
+donde $\beta_1 < 0$ y significativo indica que la brecha salarial persiste al controlar por observables. La \textbf{regresión logística} modela $P(\texttt{formal}_i = 1)$; un odds ratio $<1$ para \texttt{migrante} indica menor probabilidad de formalidad, y se compara con árbol de decisión y Random Forest. Para segmentación no supervisada, \textbf{K-Means} minimiza la inercia intracluster sobre variables estandarizadas (ingreso/hora, horas, formalidad, cotización, contrato, adecuación, educación y edad); se prefirió sobre DBSCAN por producir clusters compactos e interpretables. El número óptimo $K = 3$ se determinó por silhouette y método del codo.
 
 % modelo considerado vs descartado
 % justificación técnica
 
-\subsection{Métricas de evaluación}
+La Tabla~\ref{tab:comparacion_modelos} resume el desempeño de los modelos de clasificación sobre el conjunto de prueba (20\% de los ocupados ENE 2024).
+
+\begin{table}[H]
+	\centering
+	\caption{Comparación de modelos de clasificación. Variable objetivo: formalidad laboral (ENE 2024, conjunto de prueba).}
+	\label{tab:comparacion_modelos}
+	\begin{tabular}{lccccc}
+		\toprule
+		\textbf{Modelo} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{AUC-ROC} \\
+		\midrule
+		Regresión Logística & 0{,}858 & 0{,}878 & 0{,}957 & 0{,}916 & 0{,}892 \\
+		Árbol de Decisión   & 0{,}866 & 0{,}884 & 0{,}943 & 0{,}912 & 0{,}887 \\
+		Random Forest       & 0{,}865 & 0{,}884 & 0{,}952 & 0{,}916 & 0{,}896 \\
+		\bottomrule
+	\end{tabular}
+	\begin{flushleft}
+		\footnotesize \textit{Nota:} Los tres modelos superan al clasificador aleatorio (AUC~=~0{,}5). La diferencia de AUC entre el mejor y el peor modelo es 0{,}009; la regresión logística ofrece el mejor equilibrio entre desempeño e interpretabilidad.
+	\end{flushleft}
+\end{table}
 
 % MSE
 % Accuracy
@@ -176,51 +160,135 @@
 
 \section{Resultados}
 
-
-
-\subsection{Análisis descriptivo}
-
 % tasas de ocupación
 % ingresos
 % gráficos
 
-\subsection{Resultados de modelos supervisados}
+\subsection{Análisis descriptivo}
+
+Los migrantes presentan una tasa de ocupación del 71,5\% frente al 50,8\% de los chilenos (\textbf{+20,7 pp}), con menor inactividad (23,0\% vs 44,6\%) y levemente mayor desocupación (5,5\% vs 4,6\%). Esta mayor participación se replica en ambos sexos (hombres: 81,2\% vs 60,6\%; mujeres: 63,6\% vs 42,3\%), configurando un fenómeno estructural y entregando evidencia favorable para H1. Sin embargo, esta inserción cuantitativa coexiste con indicadores cualitativos más desfavorables.
+
+En formalidad, los migrantes alcanzan un 63,7\% frente al 69,8\% de los chilenos (\textbf{$-6{,}1$ pp}), brecha que persiste en todos los niveles educativos (Figura~\ref{fig:formalidad}). Esto es relevante porque, en cuanto a educación, los migrantes presentan menor rezago en básica (11,9\% vs 23,4\%) y mayor presencia en universitaria completa (18,5\% vs 15,6\%) y postgrado (2,1\% vs 1,3\%). El hecho de que las brechas laborales persistan pese a la mayor educación relativa de los migrantes sugiere que las diferencias de capital humano no explican completamente las brechas observadas, apuntando al subempleo calificado (H6).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{visualizaciones/fig04_formalidad}
+	\caption{Tasa de formalidad laboral por condición migratoria (izquierda) y por nivel educativo (derecha). ENE 2024, personas ocupadas.}
+	\label{fig:formalidad}
+\end{figure}
+
+En ingresos, la mediana del ingreso por hora es \$3.149 CLP para chilenos y \$2.887 CLP para migrantes (\textbf{$-8{,}3\%$}). La prueba t de Welch con bootstrap (5.000 iteraciones) estima una diferencia de \textit{medias} estadísticamente significativa de \textbf{579 CLP/hora} (IC 95\%: [389,~772]), equivalente a $\approx$\$112.800 mensuales para una jornada de 45 horas. Los migrantes se concentran en el tramo de 1 a 2 sueldos mínimos (59,0\% vs 48,6\%) con menor acceso a los tramos superiores (Figura~\ref{fig:ingreso_hora}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{visualizaciones/fig05_ingreso_hora}
+	\caption{Distribución del ingreso por hora para chilenos y migrantes ocupados. Boxplot (izquierda) e histograma de densidad hasta el percentil 95 (derecha). CASEN 2024, personas ocupadas.}
+	\label{fig:ingreso_hora}
+\end{figure}
+
+El IILM promedio es 0,536 para migrantes y 0,424 para chilenos. La aparente ventaja migrante se explica por su mayor dimensión de \textit{empleo}; en \textit{formalidad} e \textit{ingreso} presentan peores resultados, revelando la tensión entre participación cuantitativa y calidad del empleo (Figura~\ref{fig:iilm_componentes}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{visualizaciones/fig08_iilm_componentes}
+	\caption{Distribución del IILM (izquierda) y componentes promedio por condición migratoria (derecha). CASEN 2024, personas de 15 años y más.}
+	\label{fig:iilm_componentes}
+\end{figure}
+
+La distribución ocupacional evidencia segmentación clara: los migrantes están subrepresentados en profesionales (8,2\% vs 17,1\%; $-8{,}9$~pp) y técnicos (6,3\% vs 11,2\%; $-4{,}9$~pp), y sobrerrepresentados en servicios (28,1\% vs 20,1\%; $+8{,}0$~pp) y ocupaciones elementales (23,3\% vs 15,7\%; $+7{,}6$~pp). Sectorialmente, predominan en alojamiento y gastronomía ($+9{,}0$~pp) y comercio ($+6{,}2$~pp), con menor participación relativa en educación ($-7{,}1$~pp) y administración pública ($-4{,}9$~pp), coherente con la hipótesis H4 (Figura~\ref{fig:ciuo_casen}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{visualizaciones/fig23_ciuo_casen}
+	\caption{Distribución de ocupados por gran grupo ocupacional CIUO-08 y condición migratoria. CASEN 2024, personas ocupadas de 15 años y más.}
+	\label{fig:ciuo_casen}
+\end{figure}
+
+\subsection{Modelos supervisados}
 
 % coeficientes
 % probabilidades
 % interpretación
+
+El modelo OLS estima un coeficiente de \texttt{migrante} de $-0{,}099$ ($p < 0{,}001$), equivalente a una brecha salarial ajustada de $\approx 9{,}4\%$ en ingreso/hora (R²~ajustado~=~0{,}288; RMSE~=~0{,}555 en escala logarítmica). El modelo es de carácter explicativo e inferencial: las variables sociodemográficas observables no explican completamente la brecha, lo que confirma H2 (Figura~\ref{fig:coeficientes_rl}). El nivel educativo es el predictor de mayor impacto positivo; el sexo femenino tiene efecto negativo significativo, evidenciando la brecha de género estructural. En la clasificación de formalidad, los tres modelos alcanzan AUC de 0,887--0,896 (Tabla~\ref{tab:comparacion_modelos}), superando ampliamente el clasificador aleatorio. La regresión logística confirma un odds ratio $<1$ para \texttt{migrante}, indicando menor probabilidad de formalidad al controlar por todas las variables incluidas (H3). Según el Random Forest, el sector económico es el predictor más relevante de formalidad, lo que sugiere que el efecto de la condición migratoria opera principalmente de forma indirecta, a través de la concentración en sectores de menor formalidad relativa.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.82\textwidth]{visualizaciones/fig13_coeficientes_rl}
+	\caption{Coeficientes del modelo OLS. Variable dependiente: $\ln(\text{ingreso/hora})$. Barras: coeficiente puntual; líneas de error: IC~95\%. CASEN 2024, personas ocupadas con ingreso registrado.}
+	\label{fig:coeficientes_rl}
+\end{figure}
+
+Las matrices de confusión (Figura~\ref{fig:matrices_confusion}) evidencian que los tres modelos presentan un Recall alto (0,943--0,957), priorizando la detección de trabajadores formales y reduciendo así los \textbf{falsos negativos}. En términos de impacto social, el error más costoso es el \textbf{falso positivo}: clasificar como formal a un trabajador que en realidad es informal implica excluirlo del radar de las políticas de formalización, perpetuando su precariedad. Este error es particularmente relevante en el segmento migrante, donde la informalidad estructural puede quedar enmascarada por sectores con alta heterogeneidad contractual.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{visualizaciones/fig14_matrices_confusion}
+	\caption{Matrices de confusión para los tres modelos de clasificación (conjunto de prueba, 20\% de los ocupados ENE 2024). Variable objetivo: formalidad laboral.}
+	\label{fig:matrices_confusion}
+\end{figure}
 
 \subsection{Resultados de clustering}
 
 % perfiles laborales
 % análisis de clusters
 
-\subsection{Síntesis de resultados}
+La Figura~\ref{fig:codo_silhouette} presenta el método del codo y el coeficiente de silhouette para $K = 2$ a $10$. El silhouette alcanza su máximo en $K = 3$, valor que también coincide con el punto de inflexión de la curva de inercia, justificando técnicamente la selección de tres clusters sin imponer una clasificación arbitraria.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.90\textwidth]{visualizaciones/fig18_codo_silhouette}
+	\caption{Método del codo (izquierda) y coeficiente de silhouette (derecha) para $K = 2$ a $10$. K-Means sobre variables estandarizadas. CASEN 2024, personas ocupadas.}
+	\label{fig:codo_silhouette}
+\end{figure}
+
+Los dos primeros componentes PCA explican el 48,4\% de la varianza (PC1: 31,5\%; PC2: 16,9\%), confirmando la multidimensionalidad de la inserción laboral. Con $K = 3$ se identifican tres perfiles: \textbf{Cluster~1} (inserción formal-intensiva): plena formalidad, cotización e ingresos más altos; \textbf{Cluster~0} (capital educativo con inserción intermedia): educación más alta del grupo (5,6/7) con ingresos bajos y formalidad intermedia (70\%); \textbf{Cluster~2} (baja intensidad y perfil etario mayor): mayor edad, informalidad extrema (6\%) y pocas horas trabajadas. El hallazgo central es la concentración desproporcionada de migrantes en el Cluster~0: \textbf{38,2\%} frente al 9,1\% global ($\approx 4{,}2\times$), confirmando que la condición migratoria se asocia con un patrón de mayor educación pero menor retorno laboral efectivo, coherente con H5 y H6. Chilenos y migrantes se solapan parcialmente en el espacio PCA, indicando que la condición migratoria no determina por sí sola el perfil laboral, pero sí genera una distribución sistémicamente desigual entre clusters. La Tabla~\ref{tab:centroides_clusters} cuantifica las diferencias: el Cluster~0 concentra el nivel educativo más alto (5,6/7) pero prácticamente el mismo ingreso/hora que el Cluster~2 (3.017 vs 3.075~CLP), pese a una diferencia de 3,4 puntos en la escala educativa. Este desacople entre capital humano y retorno laboral es la expresión directa del subempleo calificado, y se da precisamente en el cluster donde se concentra el 38,2\% de los migrantes (Figura~\ref{fig:migrantes_por_cluster}).
+
+\begin{table}[H]
+	\centering
+	\caption{Centroides en escala original por cluster. CASEN 2024, personas ocupadas ($n = 94.918$). Tasa global de migrantes: 9,1\%.}
+	\label{tab:centroides_clusters}
+	\begin{tabular}{lrrr}
+		\toprule
+		\textbf{Variable} & \textbf{Cl.~0} & \textbf{Cl.~1} & \textbf{Cl.~2} \\
+		\midrule
+		Ingreso/hora (CLP) & 3.017 & 4.532 & 3.075 \\
+		Formalidad (\%)    & 70    & 100   & 6     \\
+		Educación (1--7)   & 5{,}6 & 3{,}4 & 2{,}2 \\
+		Edad (años)        & 38    & 42    & 49    \\
+		IILM               & 0{,}53 & 0{,}91 & 0{,}47 \\
+		\% Migrantes       & \textbf{38{,}2} & 8{,}2 & 10{,}9 \\
+		\bottomrule
+	\end{tabular}
+	\begin{flushleft}
+		\footnotesize \textit{Nota:} Cl.~0: educación más alta del grupo pero baja adecuación ocupacional (centroide $\approx 0$), indicador de subempleo calificado; Cl.~1: inserción formal consolidada; Cl.~2: trabajadores de mayor edad con informalidad extrema.
+	\end{flushleft}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.80\textwidth]{visualizaciones/fig21_migrantes_por_cluster}
+	\caption{Porcentaje de migrantes en cada cluster de inserción laboral. Línea punteada: tasa global de migrantes en la muestra de ocupados (9,1\%). K-Means $K = 3$, CASEN 2024.}
+	\label{fig:migrantes_por_cluster}
+\end{figure}
+
+\section{Conclusiones}
 
 % conectar resultados entre sí
 % no dejarlo fragmentado
 
-\section{Conclusiones}
-
-
-
-\subsection{Validación de hipótesis}
-
 % confirmación o rechazo
 
-\subsection{Implicancias}
+Los resultados confirman la hipótesis principal: la inserción laboral migrante en Chile es cuantitativamente más intensa pero cualitativamente más precaria. \textbf{H1} se confirma: ocupación migrante del 71,5\% vs 50,8\% de los chilenos. \textbf{H2} recibe fuerte apoyo empírico: la diferencia bruta de medias bootstrap es de 579~CLP/hora (IC 95\%: [389,~772]); al controlar por educación, edad, sexo y macrozona, el modelo OLS estima una brecha ajustada de $\approx$9,4\% (coef.~\texttt{migrante}~=~$-0{,}099$, $p<0{,}001$), confirmando que la desigualdad salarial persiste más allá de las diferencias de capital humano observables. \textbf{H3} se confirma: menor formalidad ($-6{,}1$~pp) y odds ratio $<1$ en la regresión logística. \textbf{H4} se confirma: sobrerrepresentación en ocupaciones elementales, servicios, alojamiento y comercio, con menor participación relativa en ocupaciones profesionales y sectores de mayor formalidad relativa. \textbf{H5} se confirma: el clustering identifica tres perfiles diferenciados y los migrantes se concentran de forma desproporcionada en el Cluster~0. \textbf{H6} se apoya: mayor educación relativa coexiste con menor participación en ocupaciones profesionales, coherente con subempleo calificado.
 
-% sociales
-% económicas
-
-
-
-\subsection{Limitaciones del estudio}
+Las implicancias son de tres órdenes. \textbf{Social:} una parte relevante de la población migrante trabaja sin acceso pleno a protección social ni remuneraciones acordes a su capital humano, con riesgo de perpetuar vulnerabilidad. \textbf{Económica:} el subempleo calificado representa una pérdida de productividad potencial para el mercado laboral agregado. \textbf{Política pública:} se identifican como áreas prioritarias el reconocimiento de credenciales educativas extranjeras, la fiscalización de formalidad en sectores de alta concentración migrante, y el fortalecimiento de mecanismos de intermediación laboral.
 
 % datos observacionales
 % sesgos
 % falta de causalidad
 
-\subsection{Líneas futuras}
+Entre las principales limitaciones: el diseño observacional impide establecer causalidad; la definición de condición migratoria difiere entre ENE (nacionalidad) y CASEN (lugar de nacimiento); ambas fuentes no son fusionables a nivel individual; el IILM es un índice de elaboración propia no validado internacionalmente; y la muestra de migrantes en ENE (4,4\%) puede afectar la estabilidad de estimaciones en subgrupos pequeños.
 
 % qué se podría mejorar
+
+Líneas futuras incluyen análisis longitudinal con cortes sucesivos de ENE y CASEN, desagregación por país de origen, aplicación de métodos de inferencia causal, modelización formal de efectos de interacción por sexo y localización territorial, y cruce con registros administrativos de cotizaciones para enriquecer el análisis de formalidad y trayectorias laborales.
