@@ -54,9 +54,6 @@ investigacion-ia/
 │   └── Proyecto/
 │       └── proyecto.tex          # Cuerpo del informe
 ├── Instrucciones/
-├── Ejemplos/
-├── generar_notebooks.py          # Regenera los 5 notebooks desde este script
-├── interpretaciones_graficos.md  # Análisis figura a figura
 └── README.md
 ```
 
